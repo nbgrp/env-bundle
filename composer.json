@@ -1,0 +1,41 @@
+{
+    "name": "nbgrp/env-bundle",
+    "type": "symfony-bundle",
+    "description": "The bundle provides a few useful custom Symfony Environment Variable processors",
+    "keywords": [
+        "Symfony",
+        "bundle",
+        "dependency-injection",
+        "environment-variable-processor",
+        "env-var-processor"
+    ],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Alexander Menshchikov",
+            "email": "amenshchikov@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1 || ^8.0",
+        "symfony/dependency-injection": "^4.4 || ^5.0 || ^6.0",
+        "symfony/framework-bundle": "^4.4 || ^5.0 || ^6.0"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "symfony/phpunit-bridge": "^5.0 || ^6.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "NbGroup\\Symfony\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NbGroup\\Tests\\Symfony\\": "tests/"
+        }
+    }
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="2"
+    strictBinaryOperands="true"
+    findUnusedPsalmSuppress="true"
+    sealAllMethods="true"
+    autoloader="vendor/autoload.php"
+    xmlns="https://getpsalm.org/schema/config"
+>
+    <projectFiles>
+        <directory name="src" />
+        <directory name="tests" />
+        <ignoreFiles>
+            <file name="src/DependencyInjection/Configuration.php" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <extraFiles>
+        <directory name="vendor" />
+    </extraFiles>
+
+    <issueHandlers>
+        <UndefinedClass>
+            <errorLevel type="suppress">
+                <directory name="tests" />
+                <file name=".php-cs-fixer.php" />
+            </errorLevel>
+        </UndefinedClass>
+
+        <!-- PHPUnit -->
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="tests" />
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+        <MissingDependency>
+            <errorLevel type="suppress">
+                <directory name="tests" />
+            </errorLevel>
+        </MissingDependency>
+    </issueHandlers>
+
+    <plugins>
+        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin" />
+    </plugins>
+</psalm>
