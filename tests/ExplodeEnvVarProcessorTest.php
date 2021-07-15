@@ -7,15 +7,13 @@ use NbGroup\Symfony\CsvEnvVarProcessor;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \NbGroup\Symfony\CsvEnvVarProcessor
+ * @covers \NbGroup\Symfony\CsvEnvVarProcessor
  *
  * @internal
  */
 final class ExplodeEnvVarProcessorTest extends TestCase
 {
     /**
-     * @covers ::getEnv
-     *
      * @dataProvider successProvider
      *
      * @phpstan-ignore-next-line

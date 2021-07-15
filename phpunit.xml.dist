@@ -24,8 +24,11 @@
             <directory suffix=".php">src</directory>
         </include>
         <exclude>
-            <directory>src/DependencyInjection</directory>
+            <file>src/CsvEnvVarProcessor.php</file>
             <file>src/NbgroupEnvBundle.php</file>
         </exclude>
+        <report>
+            <clover outputFile="clover.xml" />
+        </report>
     </coverage>
 </phpunit>

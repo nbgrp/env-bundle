@@ -8,15 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * @coversDefaultClass \NbGroup\Symfony\DependencyInjection\NbgroupEnvExtension
+ * @covers \NbGroup\Symfony\DependencyInjection\NbgroupEnvExtension
  *
  * @internal
  */
 final class NbgroupEnvExtensionTest extends TestCase
 {
-    /**
-     * @covers ::load
-     */
     public function testComplexUsage(): void
     {
         $container = new ContainerBuilder();

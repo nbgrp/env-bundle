@@ -9,7 +9,7 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
- * @coversDefaultClass \NbGroup\Symfony\DependencyInjection\Configuration
+ * @covers \NbGroup\Symfony\DependencyInjection\Configuration
  *
  * @internal
  */
@@ -19,8 +19,6 @@ final class ConfigurationTest extends TestCase
     private $processor;
 
     /**
-     * @covers ::getConfigTreeBuilder
-     *
      * @dataProvider validConfigProvider
      *
      * @phpstan-ignore-next-line
@@ -107,8 +105,6 @@ final class ConfigurationTest extends TestCase
     }
 
     /**
-     * @covers ::getConfigTreeBuilder
-     *
      * @dataProvider invalidConfigProvider
      *
      * @phpstan-ignore-next-line

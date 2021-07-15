@@ -86,6 +86,9 @@ class NbgroupEnvExtension extends Extension
             $end - $start + 8
         ));
 
+        // touch CsvEnvVarProcessor source file
+        include_once \dirname(__DIR__).'/CsvEnvVarProcessor.php';
+
         $definition = new Definition(CsvEnvVarProcessor::class, [$delimiterMap]);
         $definition->addTag('container.env_var_processor');
         $container->setDefinition(CsvEnvVarProcessor::class, $definition);

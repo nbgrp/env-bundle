@@ -8,15 +8,13 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
 /**
- * @coversDefaultClass \NbGroup\Symfony\ArrayCastEnvVarProcessor
+ * @covers \NbGroup\Symfony\ArrayCastEnvVarProcessor
  *
  * @internal
  */
 final class ArrayCastEnvVarProcessorTest extends TestCase
 {
     /**
-     * @covers ::getEnv
-     *
      * @dataProvider successProvider
      *
      * @phpstan-ignore-next-line
@@ -67,8 +65,6 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     }
 
     /**
-     * @covers ::getEnv
-     *
      * @dataProvider invalidNumericProvider
      *
      * @phpstan-ignore-next-line

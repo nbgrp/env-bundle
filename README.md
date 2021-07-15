@@ -1,6 +1,9 @@
 # Symfony Environment Variable Processors
 
-![Audit](https://github.com/nbgrp/env-bundle/actions/workflows/audit.yml/badge.svg) [![Total Downloads](https://poser.pugx.org/nbgrp/env-bundle/downloads)](//packagist.org/packages/nbgrp/env-bundle)  [![License](https://poser.pugx.org/nbgrp/env-bundle/license)](//packagist.org/packages/nbgrp/env-bundle)
+[![Codecov](https://codecov.io/gh/nbgrp/env-bundle/branch/1.x/graph/badge.svg?token=3D6RG66XXN)](https://codecov.io/gh/nbgrp/env-bundle)
+![Audit](https://github.com/nbgrp/env-bundle/actions/workflows/audit.yml/badge.svg)
+![License](https://poser.pugx.org/nbgrp/env-bundle/license)
+[![Total Downloads](https://poser.pugx.org/nbgrp/env-bundle/downloads)](//packagist.org/packages/nbgrp/env-bundle)
 
 ## Overview
 

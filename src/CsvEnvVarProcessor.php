@@ -7,6 +7,10 @@ use Symfony\Component\DependencyInjection\EnvVarProcessorInterface;
 use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
+if (class_exists(CsvEnvVarProcessor::class, false)) {
+    return;
+}
+
 final class CsvEnvVarProcessor implements EnvVarProcessorInterface
 {
     /** @var array<string, string> */
@@ -22,7 +26,8 @@ final class CsvEnvVarProcessor implements EnvVarProcessorInterface
 
     public static function getProvidedTypes(): array
     {
-        /* NB */ throw new BadMethodCallException('Unexpected call of '.__FUNCTION__); /* NB */
+        /* NB */
+        throw new BadMethodCallException('Unexpected call of '.__FUNCTION__); /* NB */
     }
 
     /**
