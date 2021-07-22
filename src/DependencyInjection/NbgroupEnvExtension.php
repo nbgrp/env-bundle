@@ -47,6 +47,8 @@ class NbgroupEnvExtension extends Extension
 
     /**
      * @param array{delimiters: array<string, string>} $config
+     *
+     * @SuppressWarnings(PHPMD.EvalExpression)
      */
     private function addCsvProcessor(array $config, ContainerBuilder $container): void
     {
