@@ -19,7 +19,7 @@ grumphp:
       config: '.php-cs-fixer.php'
 
     phpmd:
-      ruleset: ['phpmd-ruleset']
+      ruleset: [ 'phpmd-ruleset' ]
       whitelist_patterns: [ '/^src\/(.*)/' ]
 
     phpmnd:

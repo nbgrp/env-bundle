@@ -67,6 +67,10 @@ return (new PhpCsFixer\Config())
         'phpdoc_separation' => false,
         'phpdoc_summary' => false,
         'phpdoc_to_comment' => false,
+        'phpdoc_types_order' => [
+            'null_adjustment' => 'always_first',
+            'sort_algorithm' => 'alpha',
+        ],
         'single_line_throw' => false,
         'yoda_style' => false,
 
