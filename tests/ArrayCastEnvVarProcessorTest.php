@@ -29,7 +29,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     }
 
     /**
-     * @return \Generator<array{0: string, 1: array, 2: array}>
+     * @return \Generator<array{string, array, array}>
      */
     public function successProvider(): \Generator
     {
@@ -82,7 +82,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     }
 
     /**
-     * @return \Generator<array{0: string, 1: array, 2: string}>
+     * @return \Generator<array{string, array, string}>
      */
     public function invalidNumericProvider(): \Generator
     {

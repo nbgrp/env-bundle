@@ -29,7 +29,7 @@ final class ConfigurationTest extends TestCase
     }
 
     /**
-     * @return \Generator<array{0: array, 1: array, 2: string}>
+     * @return \Generator<array{array, array, string}>
      */
     public function validConfigProvider(): \Generator
     {
@@ -117,7 +117,7 @@ final class ConfigurationTest extends TestCase
     }
 
     /**
-     * @return \Generator<array{0: array, 1: string}>
+     * @return \Generator<array{array, string}>
      */
     public function invalidConfigProvider(): \Generator
     {
