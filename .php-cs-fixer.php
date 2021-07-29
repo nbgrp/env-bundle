@@ -19,6 +19,11 @@ return (new PhpCsFixer\Config())
         '@Symfony:risky' => true,
 
         // presets tuning
+        'binary_operator_spaces' => [
+            'operators' => [
+                '|' => null,
+            ],
+        ],
         'blank_line_after_opening_tag' => false,
         'blank_line_before_statement' => [
             'statements' => ['case', 'default', 'declare', 'return', 'throw', 'try'],
@@ -68,8 +73,8 @@ return (new PhpCsFixer\Config())
         'phpdoc_summary' => false,
         'phpdoc_to_comment' => false,
         'phpdoc_types_order' => [
-            'null_adjustment' => 'always_first',
-            'sort_algorithm' => 'alpha',
+            'null_adjustment' => 'always_last',
+            'sort_algorithm' => 'none',
         ],
         'single_line_throw' => false,
         'yoda_style' => false,
