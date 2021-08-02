@@ -52,7 +52,6 @@ class Configuration implements ConfigurationInterface
         /** @phpstan-ignore-next-line */
         return $rootNode->arrayNode('csv')
             ->canBeEnabled()
-            ->ignoreExtraKeys(false)
             ->beforeNormalization()
                 ->ifArray()
                 ->then(static function (array $value): array {
