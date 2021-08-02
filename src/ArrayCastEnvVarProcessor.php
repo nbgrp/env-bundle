@@ -40,6 +40,9 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
         }
     }
 
+    /**
+     * @psalm-pure
+     */
     private static function getBooleanMapper(): callable
     {
         /** @psalm-suppress MissingClosureParamType */
@@ -48,6 +51,9 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
         };
     }
 
+    /**
+     * @psalm-pure
+     */
     private static function getIntegerMapper(string $name): callable
     {
         /** @psalm-suppress MissingClosureParamType */
@@ -60,6 +66,9 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
         };
     }
 
+    /**
+     * @psalm-pure
+     */
     private static function getFloatMapper(string $name): callable
     {
         /** @psalm-suppress MissingClosureParamType */
