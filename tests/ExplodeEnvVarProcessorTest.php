@@ -15,8 +15,6 @@ final class ExplodeEnvVarProcessorTest extends TestCase
 {
     /**
      * @dataProvider successProvider
-     *
-     * @phpstan-ignore-next-line
      */
     public function testSuccess(array $delimiterMap, string $prefix, string $envValue, array $expected): void
     {

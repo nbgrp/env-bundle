@@ -16,8 +16,6 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
 {
     /**
      * @dataProvider successProvider
-     *
-     * @phpstan-ignore-next-line
      */
     public function testSuccess(string $prefix, array $envValue, array $expected): void
     {
@@ -66,8 +64,6 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
 
     /**
      * @dataProvider invalidNumericProvider
-     *
-     * @phpstan-ignore-next-line
      */
     public function testInvalidNumeric(string $prefix, array $envValue, string $expectedMessageFormat): void
     {

@@ -26,8 +26,9 @@ final class CsvEnvVarProcessor implements EnvVarProcessorInterface
 
     public static function getProvidedTypes(): array
     {
-        /* NB */
-        throw new BadMethodCallException('Unexpected call of '.__FUNCTION__); /* NB */
+        // NB
+        throw new BadMethodCallException('Unexpected call of '.__FUNCTION__);
+        // NB
     }
 
     /**

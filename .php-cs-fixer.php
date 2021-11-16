@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+// SPDX-License-Identifier: BSD-3-Clause
 
 return (new PhpCsFixer\Config())
     ->setFinder(
@@ -54,7 +55,6 @@ return (new PhpCsFixer\Config())
                 'square_brace_block',
                 'switch',
                 'throw',
-                'use_trait',
             ],
         ],
         'no_superfluous_phpdoc_tags' => [
@@ -76,12 +76,21 @@ return (new PhpCsFixer\Config())
             'null_adjustment' => 'always_last',
             'sort_algorithm' => 'none',
         ],
+        'single_line_comment_style' => [
+            'comment_types' => [
+                'asterisk',
+            ],
+        ],
         'single_line_throw' => false,
         'yoda_style' => false,
 
         // no-preset rules
         'date_time_immutable' => true,
         'final_class' => true,
+        'header_comment' => [
+            'header' => 'SPDX-License-Identifier: BSD-3-Clause',
+            'separate' => 'bottom',
+        ],
         'nullable_type_declaration_for_default_null_value' => true,
         'self_static_accessor' => true,
         'simplified_null_return' => true,

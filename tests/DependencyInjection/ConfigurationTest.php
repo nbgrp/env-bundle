@@ -20,8 +20,6 @@ final class ConfigurationTest extends TestCase
 
     /**
      * @dataProvider validConfigProvider
-     *
-     * @phpstan-ignore-next-line
      */
     public function testValidConfig(array $config, array $expected, string $description): void
     {
@@ -106,8 +104,6 @@ final class ConfigurationTest extends TestCase
 
     /**
      * @dataProvider invalidConfigProvider
-     *
-     * @phpstan-ignore-next-line
      */
     public function testInvalidConfig(array $config, string $expectedMessage): void
     {

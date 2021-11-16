@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+// SPDX-License-Identifier: BSD-3-Clause
 
 namespace NbGroup\Symfony\DependencyInjection;
 
@@ -15,15 +16,13 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
  */
 class NbgroupEnvExtension extends Extension
 {
-    private const NB_REPLACEMENT_MARK = '/* NB */';
+    private const NB_REPLACEMENT_MARK = '// NB';
 
-    /** @phpstan-ignore-next-line */
     public function getConfiguration(array $config, ContainerBuilder $container): Configuration
     {
         return new Configuration();
     }
 
-    /** @phpstan-ignore-next-line */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
@@ -85,7 +84,7 @@ class NbgroupEnvExtension extends Extension
             $classSource,
             'return ['.implode(', ', $types).'];',
             $start,
-            $end - $start + 8
+            $end - $start + \strlen(self::NB_REPLACEMENT_MARK)
         ));
 
         // touch CsvEnvVarProcessor source file
