@@ -37,5 +37,8 @@
         "psr-4": {
             "NbGroup\\Tests\\Symfony\\": "tests/"
         }
+    },
+    "scripts": {
+        "nba": "docker run -it --rm -v \"$(pwd)\":\"/app\" --workdir /app nbgrp/auditor:latest"
     }
 }
