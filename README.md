@@ -42,8 +42,8 @@ YAML config example:
 nbgroup_env:
     array_cast: true  #  enable Array Cast processor
     csv:              #  enable CSV processor
-        dot: '.'      #  csv_dot will parse env value into array with "." as a separator
-        colon: ':'    #  csv_colon will parse env value into array with ":" as a separator
+        dot: '.'      #  csv-dot will parse env value into array with "." as a separator
+        colon: ':'    #  csv-colon will parse env value into array with ":" as a separator
 ```
 
 PHP config example (for Symfony 5):
@@ -84,10 +84,10 @@ parameters:
   env(JSON_FLOAT_ENV): '{"key1": 1.1,"key2": "2.2"}'
   env(JSON_STRING_ENV): '["foo", "foo \"bar\"", ""]'
 ...
-  bools:   '%env(bool_array:csv:CSV_BOOL_ENV)%'        #  will contains [true, false, false, true]
-  ints:    '%env(int_array:csv:CSV_INT_ENV)%'          #  will contains [1, 2, 3]
-  floats:  '%env(float_array:csv:CSV_FLOAT_ENV)%'      #  will contains ['key1' => 1.1, 'key2' => 2.2]
-  strings: '%env(string_array:json:JSON_STRING_ENV)%'  #  will contains ['foo', 'foo "bar"', '']
+  bools:   '%env(bool-array:csv:CSV_BOOL_ENV)%'        #  will contains [true, false, false, true]
+  ints:    '%env(int-array:csv:CSV_INT_ENV)%'          #  will contains [1, 2, 3]
+  floats:  '%env(float-array:csv:CSV_FLOAT_ENV)%'      #  will contains ['key1' => 1.1, 'key2' => 2.2]
+  strings: '%env(string-array:json:JSON_STRING_ENV)%'  #  will contains ['foo', 'foo "bar"', '']
 ```
 
 ### `CsvEnvVarProcessor`
@@ -112,5 +112,5 @@ nbgroup_env:
 parameters:
   env(CSV_SEMICOLON_ENV): 'Alice;alice@mail.me'
 ...
-  person: '%env(csv_semi:CSV_SEMICOLON_ENV)%'  #  will contains ['Alice', 'alice@mail.me']
+  person: '%env(csv-semi:CSV_SEMICOLON_ENV)%'  #  will contains ['Alice', 'alice@mail.me']
 ```

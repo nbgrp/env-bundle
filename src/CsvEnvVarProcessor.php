@@ -32,12 +32,9 @@ final class CsvEnvVarProcessor implements EnvVarProcessorInterface
     }
 
     /**
-     * @param string $prefix
-     * @param string $name
-     *
      * @return non-empty-list<string|null>
      */
-    public function getEnv($prefix, $name, \Closure $getEnv): array
+    public function getEnv(string $prefix, string $name, \Closure $getEnv): array
     {
         if (\array_key_exists($prefix, $this->delimiterMap) === false) {
             throw new RuntimeException('There is no delimiter for prefix "'.$prefix.'"');

@@ -31,43 +31,43 @@ final class ExplodeEnvVarProcessorTest extends TestCase
     public function successProvider(): \Generator
     {
         $delimiterMap = [
-            'csv_dot' => '.',
-            'csv_dash' => '-',
-            'csv_colon' => ':',
-            'csv_bar' => '|',
+            'csv-dot' => '.',
+            'csv-dash' => '-',
+            'csv-colon' => ':',
+            'csv-bar' => '|',
         ];
 
         yield [
             $delimiterMap,
-            'csv_dot',
+            'csv-dot',
             '1.2."foo.bar"."r@p.@@l".',
             ['1', '2', 'foo.bar', 'r@p.@@l', ''],
         ];
 
         yield [
             $delimiterMap,
-            'csv_dash',
+            'csv-dash',
             '1-2-"foo-bar"-"r@p-@@l"-',
             ['1', '2', 'foo-bar', 'r@p-@@l', ''],
         ];
 
         yield [
             $delimiterMap,
-            'csv_colon',
+            'csv-colon',
             '1:2:"foo:bar":"r@p:@@l":',
             ['1', '2', 'foo:bar', 'r@p:@@l', ''],
         ];
 
         yield [
             $delimiterMap,
-            'csv_bar',
+            'csv-bar',
             '1|2|"foo|bar"|"r@p|@@l"|',
             ['1', '2', 'foo|bar', 'r@p|@@l', ''],
         ];
 
         yield [
             $delimiterMap,
-            'csv_dot',
+            'csv-dot',
             '"\".".\.."\""".\.',
             \PHP_VERSION_ID >= 70400
                 ? ['\\', '.\\..\\"""', '\\', '']

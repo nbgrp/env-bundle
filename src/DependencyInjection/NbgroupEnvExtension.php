@@ -55,7 +55,7 @@ class NbgroupEnvExtension extends Extension
         $delimiterMap = [];
 
         foreach ($config['delimiters'] as $name => $delimiter) {
-            $name = "csv_{$name}";
+            $name = "csv-{$name}";
             $types[] = "'{$name}' => 'array'";
             $delimiterMap[$name] = $delimiter;
         }

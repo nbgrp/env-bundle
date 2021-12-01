@@ -11,34 +11,31 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
     public static function getProvidedTypes(): array
     {
         return [
-            'bool_array' => 'array',
-            'int_array' => 'array',
-            'float_array' => 'array',
-            'string_array' => 'array',
+            'bool-array' => 'array',
+            'int-array' => 'array',
+            'float-array' => 'array',
+            'string-array' => 'array',
         ];
     }
 
     /**
-     * @param string $prefix
-     * @param string $name
-     *
      * @return array<array-key, bool|int|float|string>
      */
-    public function getEnv($prefix, $name, \Closure $getEnv): array
+    public function getEnv(string $prefix, string $name, \Closure $getEnv): array
     {
         $env = (array) $getEnv($name);
 
         switch ($prefix) {
-            case 'bool_array':
+            case 'bool-array':
                 return array_map(self::getBooleanMapper(), $env);
 
-            case 'int_array':
+            case 'int-array':
                 return array_map(self::getIntegerMapper($name), $env);
 
-            case 'float_array':
+            case 'float-array':
                 return array_map(self::getFloatMapper($name), $env);
 
-            default: // string_array
+            default: // string-array
                 return array_map('strval', $env);
         }
     }

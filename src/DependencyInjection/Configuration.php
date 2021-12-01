@@ -72,7 +72,7 @@ class Configuration implements ConfigurationInterface
             ->fixXmlConfig('delimiter')
             ->children()
                 ->arrayNode('delimiters')
-                    ->info('Delimiter name used as part of env var prefix (prefixed with "csv_") and value as a separator.')
+                    ->info('Delimiter name used as part of env var prefix (prefixed with "csv-") and value as a separator.')
                     ->useAttributeAsKey('name')
                     ->requiresAtLeastOneElement()
                     ->scalarPrototype()

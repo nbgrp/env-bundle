@@ -5,6 +5,10 @@ on: [push]
 jobs:
   audit:
     name: Audit
+    strategy:
+      matrix:
+        php-version: [ '7.4', '8.0', '8.1' ]
+      fail-fast: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -13,7 +17,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: ${{ matrix.php-version }}
           tools: composer:v2
           coverage: xdebug
         env:
