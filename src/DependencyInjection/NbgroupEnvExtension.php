@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 // SPDX-License-Identifier: BSD-3-Clause
 
-namespace NbGroup\Symfony\DependencyInjection;
+namespace Nbgrp\EnvBundle\DependencyInjection;
 
-use NbGroup\Symfony\ArrayCastEnvVarProcessor;
-use NbGroup\Symfony\CsvEnvVarProcessor;
+use Nbgrp\EnvBundle\ArrayCastEnvVarProcessor;
+use Nbgrp\EnvBundle\CsvEnvVarProcessor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\LogicException;
@@ -55,7 +55,7 @@ class NbgroupEnvExtension extends Extension
         $delimiterMap = [];
 
         foreach ($config['delimiters'] as $name => $delimiter) {
-            $name = "csv-{$name}";
+            $name = "csv_{$name}";
             $types[] = "'{$name}' => 'array'";
             $delimiterMap[$name] = $delimiter;
         }

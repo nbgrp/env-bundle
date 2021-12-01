@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 // SPDX-License-Identifier: BSD-3-Clause
 
-namespace NbGroup\Tests\Symfony\DependencyInjection;
+namespace Nbgrp\Tests\EnvBundle\DependencyInjection;
 
-use NbGroup\Symfony\DependencyInjection\NbgroupEnvExtension;
+use Nbgrp\EnvBundle\DependencyInjection\NbgroupEnvExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * @covers \NbGroup\Symfony\DependencyInjection\NbgroupEnvExtension
+ * @covers \Nbgrp\EnvBundle\DependencyInjection\NbgroupEnvExtension
  *
  * @internal
  */
@@ -39,13 +39,13 @@ final class NbgroupEnvExtensionTest extends TestCase
         $container->setParameter('env(JSON_STRING_ENV)', '["foo", "foo \"bar\"", ""]');
         $container->setParameter('env(COMMA_SEPARATED_ENV)', '"1",2e2,"-0"');
 
-        $container->setParameter('strings', '%env(string-array:csv-bar:BAR_SEPARATED_ENV)%');
-        $container->setParameter('bools', '%env(bool-array:csv-colon:COLON_SEPARATED_ENV)%');
-        $container->setParameter('floats', '%env(float-array:csv-dash:DASH_SEPARATED_ENV)%');
-        $container->setParameter('ints', '%env(int-array:csv-dot:DOT_SEPARATED_ENV)%');
-        $container->setParameter('floats_json', '%env(float-array:json:JSON_FLOAT_ENV)%');
-        $container->setParameter('strings_json', '%env(string-array:json:JSON_STRING_ENV)%');
-        $container->setParameter('ints_csv', '%env(int-array:csv:COMMA_SEPARATED_ENV)%');
+        $container->setParameter('strings', '%env(string_array:csv_bar:BAR_SEPARATED_ENV)%');
+        $container->setParameter('bools', '%env(bool_array:csv_colon:COLON_SEPARATED_ENV)%');
+        $container->setParameter('floats', '%env(float_array:csv_dash:DASH_SEPARATED_ENV)%');
+        $container->setParameter('ints', '%env(int_array:csv_dot:DOT_SEPARATED_ENV)%');
+        $container->setParameter('floats_json', '%env(float_array:json:JSON_FLOAT_ENV)%');
+        $container->setParameter('strings_json', '%env(string_array:json:JSON_STRING_ENV)%');
+        $container->setParameter('ints_csv', '%env(int_array:csv:COMMA_SEPARATED_ENV)%');
 
         $container->compile(true);
 

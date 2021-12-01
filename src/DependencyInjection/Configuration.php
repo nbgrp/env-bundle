@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 // SPDX-License-Identifier: BSD-3-Clause
 
-namespace NbGroup\Symfony\DependencyInjection;
+namespace Nbgrp\EnvBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
@@ -15,7 +15,7 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('nbgroup_env');
+        $treeBuilder = new TreeBuilder('nbgrp_env');
         $rootNode = $treeBuilder->getRootNode();
 
         // @formatter:off
@@ -72,7 +72,7 @@ class Configuration implements ConfigurationInterface
             ->fixXmlConfig('delimiter')
             ->children()
                 ->arrayNode('delimiters')
-                    ->info('Delimiter name used as part of env var prefix (prefixed with "csv-") and value as a separator.')
+                    ->info('Delimiter name used as part of env var prefix (prefixed with "csv_") and value as a separator.')
                     ->useAttributeAsKey('name')
                     ->requiresAtLeastOneElement()
                     ->scalarPrototype()

@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 // SPDX-License-Identifier: BSD-3-Clause
 
-namespace NbGroup\Tests\Symfony;
+namespace Nbgrp\Tests\EnvBundle;
 
-use NbGroup\Symfony\CsvEnvVarProcessor;
+use Nbgrp\EnvBundle\CsvEnvVarProcessor;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \NbGroup\Symfony\CsvEnvVarProcessor
+ * @covers \Nbgrp\EnvBundle\CsvEnvVarProcessor
  *
  * @internal
  */
@@ -31,43 +31,43 @@ final class ExplodeEnvVarProcessorTest extends TestCase
     public function successProvider(): \Generator
     {
         $delimiterMap = [
-            'csv-dot' => '.',
-            'csv-dash' => '-',
-            'csv-colon' => ':',
-            'csv-bar' => '|',
+            'csv_dot' => '.',
+            'csv_dash' => '-',
+            'csv_colon' => ':',
+            'csv_bar' => '|',
         ];
 
         yield [
             $delimiterMap,
-            'csv-dot',
+            'csv_dot',
             '1.2."foo.bar"."r@p.@@l".',
             ['1', '2', 'foo.bar', 'r@p.@@l', ''],
         ];
 
         yield [
             $delimiterMap,
-            'csv-dash',
+            'csv_dash',
             '1-2-"foo-bar"-"r@p-@@l"-',
             ['1', '2', 'foo-bar', 'r@p-@@l', ''],
         ];
 
         yield [
             $delimiterMap,
-            'csv-colon',
+            'csv_colon',
             '1:2:"foo:bar":"r@p:@@l":',
             ['1', '2', 'foo:bar', 'r@p:@@l', ''],
         ];
 
         yield [
             $delimiterMap,
-            'csv-bar',
+            'csv_bar',
             '1|2|"foo|bar"|"r@p|@@l"|',
             ['1', '2', 'foo|bar', 'r@p|@@l', ''],
         ];
 
         yield [
             $delimiterMap,
-            'csv-dot',
+            'csv_dot',
             '"\".".\.."\""".\.',
             \PHP_VERSION_ID >= 70400
                 ? ['\\', '.\\..\\"""', '\\', '']

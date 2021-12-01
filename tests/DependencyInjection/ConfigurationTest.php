@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 // SPDX-License-Identifier: BSD-3-Clause
 
-namespace NbGroup\Tests\Symfony\DependencyInjection;
+namespace Nbgrp\Tests\EnvBundle\DependencyInjection;
 
-use NbGroup\Symfony\DependencyInjection\Configuration;
+use Nbgrp\EnvBundle\DependencyInjection\Configuration;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
- * @covers \NbGroup\Symfony\DependencyInjection\Configuration
+ * @covers \Nbgrp\EnvBundle\DependencyInjection\Configuration
  *
  * @internal
  */

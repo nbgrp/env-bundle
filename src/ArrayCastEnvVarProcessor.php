@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 // SPDX-License-Identifier: BSD-3-Clause
 
-namespace NbGroup\Symfony;
+namespace Nbgrp\EnvBundle;
 
 use Symfony\Component\DependencyInjection\EnvVarProcessorInterface;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
@@ -11,31 +11,34 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
     public static function getProvidedTypes(): array
     {
         return [
-            'bool-array' => 'array',
-            'int-array' => 'array',
-            'float-array' => 'array',
-            'string-array' => 'array',
+            'bool_array' => 'array',
+            'int_array' => 'array',
+            'float_array' => 'array',
+            'string_array' => 'array',
         ];
     }
 
     /**
+     * @param string $prefix
+     * @param string $name
+     *
      * @return array<array-key, bool|int|float|string>
      */
-    public function getEnv(string $prefix, string $name, \Closure $getEnv): array
+    public function getEnv($prefix, $name, \Closure $getEnv): array
     {
         $env = (array) $getEnv($name);
 
         switch ($prefix) {
-            case 'bool-array':
+            case 'bool_array':
                 return array_map(self::getBooleanMapper(), $env);
 
-            case 'int-array':
+            case 'int_array':
                 return array_map(self::getIntegerMapper($name), $env);
 
-            case 'float-array':
+            case 'float_array':
                 return array_map(self::getFloatMapper($name), $env);
 
-            default: // string-array
+            default: // string_array
                 return array_map('strval', $env);
         }
     }

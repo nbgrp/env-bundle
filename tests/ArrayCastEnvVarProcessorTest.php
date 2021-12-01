@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 // SPDX-License-Identifier: BSD-3-Clause
 
-namespace NbGroup\Tests\Symfony;
+namespace Nbgrp\Tests\EnvBundle;
 
-use NbGroup\Symfony\ArrayCastEnvVarProcessor;
+use Nbgrp\EnvBundle\ArrayCastEnvVarProcessor;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
 /**
- * @covers \NbGroup\Symfony\ArrayCastEnvVarProcessor
+ * @covers \Nbgrp\EnvBundle\ArrayCastEnvVarProcessor
  *
  * @internal
  */
@@ -32,31 +32,31 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     public function successProvider(): \Generator
     {
         yield [
-            'bool-array',
+            'bool_array',
             [1, 2, 0, -1, 'true', 'false', 'yes', 'no', 'on', 'off', 'any'],
             [true, true, false, true, true, false, true, false, true, false, false],
         ];
 
         yield [
-            'int-array',
+            'int_array',
             ['0', '1', '-2.0', '3.5', 0, 1, -2.0, 3.5],
             [0, 1, -2, 3, 0, 1, -2, 3],
         ];
 
         yield [
-            'float-array',
+            'float_array',
             [0.0, -0.0, 1.1, -2.0, 3.5, '0.0', '-0.0', '1.1', '-2.0', '3.5'],
             [0.0, 0.0, 1.1, -2.0, 3.5, 0.0, 0.0, 1.1, -2.0, 3.5],
         ];
 
         yield [
-            'string-array',
+            'string_array',
             [1, 2, 3, true, false],
             ['1', '2', '3', '1', ''],
         ];
 
         yield [
-            'bool-array',
+            'bool_array',
             ['t' => 1, 'f' => 0],
             ['t' => true, 'f' => false],
         ];
@@ -83,13 +83,13 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     public function invalidNumericProvider(): \Generator
     {
         yield [
-            'int-array',
+            'int_array',
             ['0', '1', 'NaN'],
             'Non-numeric member of env var "%s" cannot be cast to int.',
         ];
 
         yield [
-            'float-array',
+            'float_array',
             ['0.0', '1.0', '1.0.1'],
             'Non-numeric member of env var "%s" cannot be cast to float.',
         ];

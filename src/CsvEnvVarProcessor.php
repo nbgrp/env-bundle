@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 // SPDX-License-Identifier: BSD-3-Clause
 
-namespace NbGroup\Symfony;
+namespace Nbgrp\EnvBundle;
 
 use Symfony\Component\DependencyInjection\EnvVarProcessorInterface;
 use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
@@ -32,9 +32,12 @@ final class CsvEnvVarProcessor implements EnvVarProcessorInterface
     }
 
     /**
+     * @param string $prefix
+     * @param string $name
+     *
      * @return non-empty-list<string|null>
      */
-    public function getEnv(string $prefix, string $name, \Closure $getEnv): array
+    public function getEnv($prefix, $name, \Closure $getEnv): array
     {
         if (\array_key_exists($prefix, $this->delimiterMap) === false) {
             throw new RuntimeException('There is no delimiter for prefix "'.$prefix.'"');
