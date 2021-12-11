@@ -1,7 +1,8 @@
 {
     "name": "nbgrp/env-bundle",
-    "type": "symfony-bundle",
     "description": "The bundle provides a few useful custom Symfony Environment Variable processors",
+    "license": "BSD-3-Clause",
+    "type": "symfony-bundle",
     "keywords": [
         "Symfony",
         "bundle",
@@ -9,7 +10,6 @@
         "environment-variable-processor",
         "env-var-processor"
     ],
-    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Alexander Menshchikov",
@@ -27,9 +27,6 @@
         "roave/security-advisories": "dev-latest",
         "symfony/phpunit-bridge": "^5.4"
     },
-    "config": {
-        "sort-packages": true
-    },
     "autoload": {
         "psr-4": {
             "Nbgrp\\EnvBundle\\": "src/"
@@ -40,7 +37,10 @@
             "Nbgrp\\Tests\\EnvBundle\\": "tests/"
         }
     },
+    "config": {
+        "sort-packages": true
+    },
     "scripts": {
-        "nba": "docker run -it --rm -v \"$(pwd)\":\"/app\" --workdir /app nbgrp/auditor:latest"
+        "nba": "docker run -it --rm -v $PWD:/app --workdir /app nbgrp/auditor:latest"
     }
 }
