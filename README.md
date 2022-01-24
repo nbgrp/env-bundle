@@ -91,7 +91,7 @@ parameters:
 ...
     bools:   '%env(bool-array:csv:CSV_BOOL_ENV)%'        #  will contains [true, false, false, true]
     ints:    '%env(int-array:csv:CSV_INT_ENV)%'          #  will contains [1, 2, 3]
-    floats:  '%env(float-array:csv:CSV_FLOAT_ENV)%'      #  will contains ['key1' => 1.1, 'key2' => 2.2]
+    floats:  '%env(float-array:json:JSON_FLOAT_ENV)%'    #  will contains ['key1' => 1.1, 'key2' => 2.2]
     strings: '%env(string-array:json:JSON_STRING_ENV)%'  #  will contains ['foo', 'foo "bar"', '']
 ```
 
