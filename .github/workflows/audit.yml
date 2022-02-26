@@ -1,10 +1,14 @@
 name: Audit
 
-on: [push]
+on: [ push, pull_request ]
 
 jobs:
   audit:
     name: Audit
+    strategy:
+      matrix:
+        php-version: [ '7.4', '8.0', '8.1' ]
+      fail-fast: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -13,7 +17,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: ${{ matrix.php-version }}
           tools: composer:v2
           coverage: xdebug
         env:
@@ -27,7 +31,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies

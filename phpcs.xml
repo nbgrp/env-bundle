@@ -58,7 +58,6 @@
     </rule>
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceEqualOperator" />
     <rule ref="SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly" />
-    <rule ref="SlevomatCodingStandard.Exceptions.RequireNonCapturingCatch" />
     <rule ref="SlevomatCodingStandard.Functions.StaticClosure" />
     <rule ref="SlevomatCodingStandard.Functions.StrictCall" />
     <rule ref="SlevomatCodingStandard.Functions.ArrowFunctionDeclaration">
