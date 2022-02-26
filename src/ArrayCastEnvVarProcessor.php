@@ -15,6 +15,8 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
             'int_array' => 'array',
             'float_array' => 'array',
             'string_array' => 'array',
+            'base64_array' => 'array',
+            'base64url_array' => 'array',
         ];
     }
 
@@ -37,6 +39,12 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
 
             case 'float_array':
                 return array_map(self::getFloatMapper($name), $env);
+
+            case 'base64_array':
+                return array_map(self::getBase64Mapper($name), $env);
+
+            case 'base64url_array':
+                return array_map(self::getBase64UrlMapper($name), $env);
 
             default: // string_array
                 return array_map('strval', $env);
@@ -81,6 +89,58 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
             }
 
             return (float) $value;
+        };
+    }
+
+    /**
+     * @psalm-pure
+     */
+    private static function getBase64Mapper(string $name): callable
+    {
+        /** @psalm-suppress MissingClosureParamType */
+        return static function ($value) use ($name): string {
+            if (\function_exists('sodium_base642bin')) {
+                try {
+                    return \strlen($value) % 4 === 0
+                        ? sodium_base642bin($value, \SODIUM_BASE64_VARIANT_ORIGINAL)
+                        : sodium_base642bin($value, \SODIUM_BASE64_VARIANT_ORIGINAL_NO_PADDING);
+                } catch (\SodiumException $_) {
+                    throw new RuntimeException(sprintf('Env var "%s" must be a valid base64 string.', $name));
+                }
+            }
+
+            $decoded = base64_decode(str_pad($value, \strlen($value) % 4, '='), true);
+            if ($decoded === false) {
+                throw new RuntimeException(sprintf('Env var "%s" must be a valid base64 string.', $name));
+            }
+
+            return $decoded;
+        };
+    }
+
+    /**
+     * @psalm-pure
+     */
+    private static function getBase64UrlMapper(string $name): callable
+    {
+        /** @psalm-suppress MissingClosureParamType */
+        return static function ($value) use ($name): string {
+            if (\function_exists('sodium_base642bin')) {
+                try {
+                    return \strlen($value) % 4 === 0
+                        ? sodium_base642bin($value, \SODIUM_BASE64_VARIANT_URLSAFE)
+                        : sodium_base642bin($value, \SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING);
+                } catch (\SodiumException $_) {
+                    throw new RuntimeException(sprintf('Env var "%s" must be a valid base64url string.', $name));
+                }
+            }
+
+            $decoded = base64_decode(str_pad(strtr($value, '-_', '+/'), \strlen($value) % 4, '='), true);
+            if ($decoded === false) {
+                throw new RuntimeException(sprintf('Env var "%s" must be a valid base64url string.', $name));
+            }
+
+            return $decoded;
         };
     }
 }
