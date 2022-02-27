@@ -43,7 +43,7 @@ jobs:
           vendor/bin/simple-phpunit install
           echo "::endgroup::"
 
-      - name: Audit
+      - name: Auditor
         uses: docker://nbgrp/auditor:latest
 
       - name: Tests
