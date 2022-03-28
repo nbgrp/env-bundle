@@ -11,8 +11,6 @@
 
 [![SymfonyInsight](https://insight.symfony.com/projects/eaacf2fc-2729-4e18-9b1c-f8fbd7827a7a/small.svg)](https://insight.symfony.com/projects/eaacf2fc-2729-4e18-9b1c-f8fbd7827a7a)
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/S6S073WSW)
-
 ## Overview
 
 The bundle provides a few useful custom Symfony Environment Variable processors:
