@@ -26,7 +26,7 @@ final class ExplodeEnvVarProcessorTest extends TestCase
     }
 
     /**
-     * @return \Generator<array{array, string, string, string[]}>
+     * @return \Generator<array{array, string, string, list<string>}>
      */
     public function successProvider(): \Generator
     {
