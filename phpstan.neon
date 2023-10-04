@@ -7,3 +7,11 @@ parameters:
     - vendor/bin/.phpunit/phpunit/vendor/autoload.php
 
   checkMissingIterableValueType: false
+
+  ignoreErrors:
+    -
+      message: '/Parameter #1 \$callback of function array_map expects/'
+      path: 'src/ArrayCastEnvVarProcessor.php'
+    -
+      message: '/Parameter #1 \$string of function str_getcsv expects/'
+      path: 'src/CsvEnvVarProcessor.php'
