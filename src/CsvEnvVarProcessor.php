@@ -37,13 +37,16 @@ final class CsvEnvVarProcessor implements EnvVarProcessorInterface
     public function getEnv(string $prefix, string $name, \Closure $getEnv): array
     {
         if (\array_key_exists($prefix, $this->delimiterMap) === false) {
-            throw new RuntimeException('There is no delimiter for prefix "'.$prefix.'"');
+            throw new RuntimeException('There is no delimiter for prefix "'.$prefix.'".');
         }
 
         $delimiter = $this->delimiterMap[$prefix];
         $env = $getEnv($name);
 
-        /** @phpstan-ignore-next-line */
+        if (!\is_string($env)) {
+            throw new RuntimeException('Environment variable "'.$name.'" should be a string.');
+        }
+
         return str_getcsv($env, $delimiter, '"', \PHP_VERSION_ID >= 70400 ? '' : '\\');
     }
 }
