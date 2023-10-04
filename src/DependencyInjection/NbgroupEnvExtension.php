@@ -72,12 +72,12 @@ class NbgroupEnvExtension extends Extension
 
         $start = strpos($classSource, self::NB_REPLACEMENT_MARK);
         if ($start === false) {
-            throw new LogicException('Opening NB replacement mark not found');
+            throw new LogicException('Opening NB replacement mark not found.');
         }
 
         $end = strpos($classSource, self::NB_REPLACEMENT_MARK, $start + 1);
         if ($end === false) {
-            throw new LogicException('Closing NB replacement mark not found');
+            throw new LogicException('Closing NB replacement mark not found.');
         }
 
         eval(substr_replace(

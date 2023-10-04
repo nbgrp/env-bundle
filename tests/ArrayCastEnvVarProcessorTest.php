@@ -97,13 +97,13 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
         yield [
             'int_array',
             ['0', '1', 'NaN'],
-            'Non-numeric member of env var "%s" cannot be cast to int.',
+            'Non-numeric member of environment variable "%s" cannot be cast to int.',
         ];
 
         yield [
             'float_array',
             ['0.0', '1.0', '1.0.1'],
-            'Non-numeric member of env var "%s" cannot be cast to float.',
+            'Non-numeric member of environment variable "%s" cannot be cast to float.',
         ];
     }
 
@@ -130,13 +130,13 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
         yield [
             'base64_array',
             ['Z!==', 'Z!'],
-            'Env var "%s" must be a valid base64 string.',
+            'Environment variable "%s" must be a valid base64 string.',
         ];
 
         yield [
             'base64url_array',
             ['-=', '_!'],
-            'Env var "%s" must be a valid base64url string.',
+            'Environment variable "%s" must be a valid base64url string.',
         ];
     }
 }
