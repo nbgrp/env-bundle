@@ -19,7 +19,7 @@ final class ConfigurationTest extends TestCase
     private $processor;
 
     /**
-     * @dataProvider validConfigProvider
+     * @dataProvider provideValidConfigCases
      */
     public function testValidConfig(array $config, array $expected, string $description): void
     {
@@ -29,7 +29,7 @@ final class ConfigurationTest extends TestCase
     /**
      * @return \Generator<array{array, array, string}>
      */
-    public function validConfigProvider(): \Generator
+    public function provideValidConfigCases(): iterable
     {
         yield [
             [],
@@ -103,7 +103,7 @@ final class ConfigurationTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidConfigProvider
+     * @dataProvider provideInvalidConfigCases
      */
     public function testInvalidConfig(array $config, string $expectedMessage): void
     {
@@ -115,7 +115,7 @@ final class ConfigurationTest extends TestCase
     /**
      * @return \Generator<array{array, string}>
      */
-    public function invalidConfigProvider(): \Generator
+    public function provideInvalidConfigCases(): iterable
     {
         yield [
             [

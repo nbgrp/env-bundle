@@ -11,7 +11,7 @@ return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules([
         // base presets
-        '@PSR12' => true,
+        '@PER' => true,
         '@PhpCsFixer' => true,
         '@Symfony' => true,
 
@@ -37,6 +37,7 @@ return (new PhpCsFixer\Config())
         ],
         'linebreak_after_opening_tag' => false,
         'method_argument_space' => [
+            'attribute_placement' => 'standalone',
             'on_multiline' => 'ignore',
         ],
         'multiline_whitespace_before_semicolons' => [
@@ -76,11 +77,7 @@ return (new PhpCsFixer\Config())
             'null_adjustment' => 'always_last',
             'sort_algorithm' => 'none',
         ],
-        'single_line_comment_style' => [
-            'comment_types' => [
-                'asterisk',
-            ],
-        ],
+        'single_line_comment_style' => true,
         'single_line_throw' => false,
         'yoda_style' => false,
 
@@ -94,6 +91,7 @@ return (new PhpCsFixer\Config())
         'nullable_type_declaration_for_default_null_value' => true,
         'self_static_accessor' => true,
         'simplified_null_return' => true,
+        'single_line_empty_body' => true,
         'static_lambda' => true,
     ])
 ;

@@ -44,6 +44,7 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
                 return array_map(self::getBase64UrlMapper($name), $env);
 
             default: // string-array
+                /** @phpstan-ignore-next-line */
                 return array_map('strval', $env);
         }
     }
