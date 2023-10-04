@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 final class ArrayCastEnvVarProcessorTest extends TestCase
 {
     /**
-     * @dataProvider successProvider
+     * @dataProvider provideSuccessCases
      */
     public function testSuccess(string $prefix, array $envValue, array $expected): void
     {
@@ -29,7 +29,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     /**
      * @return \Generator<array{string, array, array}>
      */
-    public function successProvider(): \Generator
+    public function provideSuccessCases(): iterable
     {
         yield 'bool-array' => [
             'bool-array',
@@ -75,7 +75,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidNumericProvider
+     * @dataProvider provideInvalidNumericCases
      */
     public function testInvalidNumeric(string $prefix, array $envValue, string $expectedMessageFormat): void
     {
@@ -92,7 +92,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     /**
      * @return \Generator<array{string, array, string}>
      */
-    public function invalidNumericProvider(): \Generator
+    public function provideInvalidNumericCases(): iterable
     {
         yield [
             'int-array',
@@ -108,7 +108,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidBase64Provider
+     * @dataProvider provideInvalidBase64Cases
      */
     public function testInvalidBase64(string $prefix, array $envValue, string $expectedMessageFormat): void
     {
@@ -125,7 +125,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     /**
      * @return \Generator<array{string, array, string}>
      */
-    public function invalidBase64Provider(): \Generator
+    public function provideInvalidBase64Cases(): iterable
     {
         yield [
             'base64-array',
