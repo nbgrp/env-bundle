@@ -44,8 +44,7 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
                 return array_map(self::getBase64UrlMapper($name), $env);
 
             default: // string-array
-                /** @phpstan-ignore-next-line */
-                return array_map('strval', $env);
+                return array_map(self::getStringMapper($name), $env);
         }
     }
 
@@ -68,7 +67,7 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
         /** @psalm-suppress MissingClosureParamType */
         return static function ($value) use ($name): int {
             if ((filter_var($value, \FILTER_VALIDATE_INT) ?: filter_var($value, \FILTER_VALIDATE_FLOAT)) === false) {
-                throw new RuntimeException(sprintf('Non-numeric member of env var "%s" cannot be cast to int.', $name));
+                throw new RuntimeException('Non-numeric member of environment variable "'.$name.'" cannot be cast to int.');
             }
 
             return (int) $value;
@@ -83,7 +82,7 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
         /** @psalm-suppress MissingClosureParamType */
         return static function ($value) use ($name): float {
             if (filter_var($value, \FILTER_VALIDATE_FLOAT) === false) {
-                throw new RuntimeException(sprintf('Non-numeric member of env var "%s" cannot be cast to float.', $name));
+                throw new RuntimeException('Non-numeric member of environment variable "'.$name.'" cannot be cast to float.');
             }
 
             return (float) $value;
@@ -103,13 +102,13 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
                         ? sodium_base642bin($value, \SODIUM_BASE64_VARIANT_ORIGINAL)
                         : sodium_base642bin($value, \SODIUM_BASE64_VARIANT_ORIGINAL_NO_PADDING);
                 } catch (\SodiumException $_) {
-                    throw new RuntimeException(sprintf('Env var "%s" must be a valid base64 string.', $name));
+                    throw new RuntimeException('Environment variable "'.$name.'" must be a valid base64 string.');
                 }
             }
 
             $decoded = base64_decode(str_pad($value, \strlen($value) % 4, '='), true);
             if ($decoded === false) {
-                throw new RuntimeException(sprintf('Env var "%s" must be a valid base64 string.', $name));
+                throw new RuntimeException('Environment variable "'.$name.'" must be a valid base64 string.');
             }
 
             return $decoded;
@@ -129,16 +128,27 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
                         ? sodium_base642bin($value, \SODIUM_BASE64_VARIANT_URLSAFE)
                         : sodium_base642bin($value, \SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING);
                 } catch (\SodiumException $_) {
-                    throw new RuntimeException(sprintf('Env var "%s" must be a valid base64url string.', $name));
+                    throw new RuntimeException('Environment variable "'.$name.'" must be a valid base64url string.');
                 }
             }
 
             $decoded = base64_decode(str_pad(strtr($value, '-_', '+/'), \strlen($value) % 4, '='), true);
             if ($decoded === false) {
-                throw new RuntimeException(sprintf('Env var "%s" must be a valid base64url string.', $name));
+                throw new RuntimeException('Environment variable "'.$name.'" must be a valid base64url string.');
             }
 
             return $decoded;
+        };
+    }
+
+    /**
+     * @psalm-pure
+     */
+    private static function getStringMapper(string $name): callable
+    {
+        /** @psalm-suppress MissingClosureParamType */
+        return static function ($value): string {
+            return (string) $value;
         };
     }
 }

@@ -9,7 +9,7 @@
 [![Codecov](https://codecov.io/gh/nbgrp/env-bundle/branch/1.x/graph/badge.svg?token=3D6RG66XXN)](https://codecov.io/gh/nbgrp/env-bundle)
 [![Audit](https://github.com/nbgrp/env-bundle/actions/workflows/audit.yml/badge.svg)](https://github.com/nbgrp/env-bundle/actions/workflows/audit.yml)
 
-[![SymfonyInsight](https://insight.symfony.com/projects/eaacf2fc-2729-4e18-9b1c-f8fbd7827a7a/small.svg)](https://insight.symfony.com/projects/eaacf2fc-2729-4e18-9b1c-f8fbd7827a7a)
+[![SymfonyInsight](https://insight.symfony.com/projects/ad06ec8e-3539-4b3c-a5bb-6212f6f842e4/small.svg)](https://insight.symfony.com/projects/ad06ec8e-3539-4b3c-a5bb-6212f6f842e4)
 
 ## Overview
 

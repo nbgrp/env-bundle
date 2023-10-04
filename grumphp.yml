@@ -25,6 +25,9 @@ grumphp:
     phpmnd:
       directory: 'src'
 
+    phpstan:
+      use_grumphp_paths: false
+
     psalm: ~
 
     securitychecker_local: ~
