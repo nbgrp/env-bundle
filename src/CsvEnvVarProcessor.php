@@ -43,6 +43,7 @@ final class CsvEnvVarProcessor implements EnvVarProcessorInterface
         $delimiter = $this->delimiterMap[$prefix];
         $env = $getEnv($name);
 
+        /** @phpstan-ignore-next-line */
         return str_getcsv($env, $delimiter, '"', \PHP_VERSION_ID >= 70400 ? '' : '\\');
     }
 }
