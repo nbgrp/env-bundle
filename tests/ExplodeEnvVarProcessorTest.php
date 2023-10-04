@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 final class ExplodeEnvVarProcessorTest extends TestCase
 {
     /**
-     * @dataProvider successProvider
+     * @dataProvider provideSuccessCases
      */
     public function testSuccess(array $delimiterMap, string $prefix, string $envValue, array $expected): void
     {
@@ -28,7 +28,7 @@ final class ExplodeEnvVarProcessorTest extends TestCase
     /**
      * @return \Generator<array{array, string, string, list<string>}>
      */
-    public function successProvider(): \Generator
+    public function provideSuccessCases(): iterable
     {
         $delimiterMap = [
             'csv_dot' => '.',

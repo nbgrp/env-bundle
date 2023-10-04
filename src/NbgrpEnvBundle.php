@@ -8,6 +8,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * @final
  */
-class NbgrpEnvBundle extends Bundle
-{
-}
+class NbgrpEnvBundle extends Bundle {}
