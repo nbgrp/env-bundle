@@ -4,7 +4,6 @@
     strictBinaryOperands="true"
     findUnusedPsalmSuppress="true"
     sealAllMethods="true"
-    phpVersion="8.1"
     xmlns="https://getpsalm.org/schema/config"
 >
     <projectFiles>
