@@ -1,5 +1,7 @@
-<?php declare(strict_types=1);
+<?php
 // SPDX-License-Identifier: BSD-3-Clause
+
+declare(strict_types=1);
 
 namespace Nbgrp\EnvBundle\DependencyInjection;
 
@@ -84,7 +86,7 @@ class NbgroupEnvExtension extends Extension
             $classSource,
             'return ['.implode(', ', $types).'];',
             $start,
-            $end - $start + \strlen(self::NB_REPLACEMENT_MARK)
+            $end - $start + \strlen(self::NB_REPLACEMENT_MARK),
         ));
 
         // touch CsvEnvVarProcessor source file

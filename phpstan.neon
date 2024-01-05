@@ -7,3 +7,8 @@ parameters:
     - vendor/bin/.phpunit/phpunit/vendor/autoload.php
 
   checkMissingIterableValueType: false
+
+  ignoreErrors:
+    -
+      message: '/Cannot cast mixed to (int|float|string)/'
+      path: 'src/ArrayCastEnvVarProcessor.php'

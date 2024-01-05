@@ -17,15 +17,15 @@
         }
     ],
     "require": {
-        "php": "^7.2 || ^8.0",
+        "php": "^8.2",
         "ext-filter": "*",
-        "symfony/config": "^5.2 || ^6.0",
-        "symfony/dependency-injection": "^5.2 || ^6.0",
-        "symfony/http-kernel": "^5.2 || ^6.0"
+        "symfony/config": "^7",
+        "symfony/dependency-injection": "^7",
+        "symfony/http-kernel": "^7"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
-        "symfony/phpunit-bridge": "^6.0"
+        "symfony/phpunit-bridge": "^7"
     },
     "autoload": {
         "psr-4": {

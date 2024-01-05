@@ -1,5 +1,7 @@
-<?php declare(strict_types=1);
+<?php
 // SPDX-License-Identifier: BSD-3-Clause
+
+declare(strict_types=1);
 
 namespace Nbgrp\Tests\EnvBundle;
 
@@ -21,9 +23,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     {
         $processor = new ArrayCastEnvVarProcessor();
 
-        self::assertSame($expected, $processor->getEnv($prefix, '', static function () use ($envValue): array {
-            return $envValue;
-        }));
+        self::assertSame($expected, $processor->getEnv($prefix, 'test-string', static fn (): array => $envValue));
     }
 
     /**
@@ -84,9 +84,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(sprintf($expectedMessageFormat, 'DM'));
 
-        $processor->getEnv($prefix, 'DM', static function () use ($envValue): array {
-            return $envValue;
-        });
+        $processor->getEnv($prefix, 'DM', static fn (): array => $envValue);
     }
 
     /**
@@ -117,9 +115,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(sprintf($expectedMessageFormat, 'DM'));
 
-        $processor->getEnv($prefix, 'DM', static function () use ($envValue): array {
-            return $envValue;
-        });
+        $processor->getEnv($prefix, 'DM', static fn (): array => $envValue);
     }
 
     /**

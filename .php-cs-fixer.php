@@ -1,5 +1,7 @@
-<?php declare(strict_types=1);
+<?php
 // SPDX-License-Identifier: BSD-3-Clause
+
+declare(strict_types=1);
 
 return (new PhpCsFixer\Config())
     ->setFinder(
@@ -11,26 +13,26 @@ return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules([
         // base presets
-        '@PER' => true,
+        '@PER-CS' => true,
         '@PhpCsFixer' => true,
         '@Symfony' => true,
+        '@PHP81Migration' => true,
 
         // risky presets
+        '@PER-CS:risky' => true,
         '@PhpCsFixer:risky' => true,
         '@Symfony:risky' => true,
+        '@PHP80Migration:risky' => true,
 
         // presets tuning
-        'binary_operator_spaces' => [
-            'operators' => [
-                '|' => null,
-            ],
-        ],
         'blank_line_after_opening_tag' => false,
         'blank_line_before_statement' => [
             'statements' => ['case', 'default', 'declare', 'return', 'throw', 'try'],
         ],
         'comment_to_phpdoc' => [
             'ignored_tags' => [
+                'phan-suppress-current-line',
+                'phan-suppress-next-line',
                 'see',
                 'todo',
             ],
@@ -77,7 +79,11 @@ return (new PhpCsFixer\Config())
             'null_adjustment' => 'always_last',
             'sort_algorithm' => 'none',
         ],
-        'single_line_comment_style' => true,
+        'single_line_comment_style' => [
+            'comment_types' => [
+                'asterisk',
+            ],
+        ],
         'single_line_throw' => false,
         'yoda_style' => false,
 
@@ -86,6 +92,7 @@ return (new PhpCsFixer\Config())
         'final_class' => true,
         'header_comment' => [
             'header' => 'SPDX-License-Identifier: BSD-3-Clause',
+            'location' => 'after_open',
             'separate' => 'bottom',
         ],
         'nullable_type_declaration_for_default_null_value' => true,

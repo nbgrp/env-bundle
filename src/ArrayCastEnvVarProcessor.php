@@ -1,5 +1,7 @@
-<?php declare(strict_types=1);
+<?php
 // SPDX-License-Identifier: BSD-3-Clause
+
+declare(strict_types=1);
 
 namespace Nbgrp\EnvBundle;
 
@@ -21,31 +23,22 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
     }
 
     /**
-     * @return array<array-key, bool|int|float|string>
+     * @return array<array-key, scalar>
+     *
+     * @psalm-suppress MixedReturnTypeCoercion
      */
     public function getEnv(string $prefix, string $name, \Closure $getEnv): array
     {
         $env = (array) $getEnv($name);
 
-        switch ($prefix) {
-            case 'bool-array':
-                return array_map(self::getBooleanMapper(), $env);
-
-            case 'int-array':
-                return array_map(self::getIntegerMapper($name), $env);
-
-            case 'float-array':
-                return array_map(self::getFloatMapper($name), $env);
-
-            case 'base64-array':
-                return array_map(self::getBase64Mapper($name), $env);
-
-            case 'base64url-array':
-                return array_map(self::getBase64UrlMapper($name), $env);
-
-            default: // string-array
-                return array_map(self::getStringMapper($name), $env);
-        }
+        return match ($prefix) {
+            'bool-array' => array_map(self::getBooleanMapper(), $env),
+            'int-array' => array_map(self::getIntegerMapper($name), $env),
+            'float-array' => array_map(self::getFloatMapper($name), $env),
+            'base64-array' => array_map(self::getBase64Mapper($name), $env),
+            'base64url-array' => array_map(self::getBase64UrlMapper($name), $env),
+            /* string-array */ default => array_map(self::getStringMapper($name), $env),
+        };
     }
 
     /**
@@ -53,10 +46,7 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
      */
     private static function getBooleanMapper(): callable
     {
-        /** @psalm-suppress MissingClosureParamType */
-        return static function ($value): bool {
-            return (bool) (filter_var($value, \FILTER_VALIDATE_BOOLEAN, ['flags' => \FILTER_NULL_ON_FAILURE]) ?? filter_var($value, \FILTER_VALIDATE_INT) ?: filter_var($value, \FILTER_VALIDATE_FLOAT));
-        };
+        return static fn (mixed $value): bool => (bool) (filter_var($value, \FILTER_VALIDATE_BOOLEAN, ['flags' => \FILTER_NULL_ON_FAILURE]) ?? filter_var($value, \FILTER_VALIDATE_INT) ?: filter_var($value, \FILTER_VALIDATE_FLOAT));
     }
 
     /**
@@ -64,8 +54,7 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
      */
     private static function getIntegerMapper(string $name): callable
     {
-        /** @psalm-suppress MissingClosureParamType */
-        return static function ($value) use ($name): int {
+        return static function (mixed $value) use ($name): int {
             if ((filter_var($value, \FILTER_VALIDATE_INT) ?: filter_var($value, \FILTER_VALIDATE_FLOAT)) === false) {
                 throw new RuntimeException('Non-numeric member of environment variable "'.$name.'" cannot be cast to int.');
             }
@@ -79,8 +68,7 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
      */
     private static function getFloatMapper(string $name): callable
     {
-        /** @psalm-suppress MissingClosureParamType */
-        return static function ($value) use ($name): float {
+        return static function (mixed $value) use ($name): float {
             if (filter_var($value, \FILTER_VALIDATE_FLOAT) === false) {
                 throw new RuntimeException('Non-numeric member of environment variable "'.$name.'" cannot be cast to float.');
             }
@@ -94,14 +82,17 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
      */
     private static function getBase64Mapper(string $name): callable
     {
-        /** @psalm-suppress MissingClosureParamType */
-        return static function ($value) use ($name): string {
+        return static function (mixed $value) use ($name): string {
+            if (!\is_string($value)) {
+                throw new RuntimeException('Environment variable "'.$name.'" must be a valid base64 string.');
+            }
+
             if (\function_exists('sodium_base642bin')) {
                 try {
                     return \strlen($value) % 4 === 0
                         ? sodium_base642bin($value, \SODIUM_BASE64_VARIANT_ORIGINAL)
                         : sodium_base642bin($value, \SODIUM_BASE64_VARIANT_ORIGINAL_NO_PADDING);
-                } catch (\SodiumException $_) {
+                } catch (\SodiumException) {
                     throw new RuntimeException('Environment variable "'.$name.'" must be a valid base64 string.');
                 }
             }
@@ -120,14 +111,17 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
      */
     private static function getBase64UrlMapper(string $name): callable
     {
-        /** @psalm-suppress MissingClosureParamType */
-        return static function ($value) use ($name): string {
+        return static function (mixed $value) use ($name): string {
+            if (!\is_string($value)) {
+                throw new RuntimeException('Environment variable "'.$name.'" must be a valid base64url string.');
+            }
+
             if (\function_exists('sodium_base642bin')) {
                 try {
                     return \strlen($value) % 4 === 0
                         ? sodium_base642bin($value, \SODIUM_BASE64_VARIANT_URLSAFE)
                         : sodium_base642bin($value, \SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING);
-                } catch (\SodiumException $_) {
+                } catch (\SodiumException) {
                     throw new RuntimeException('Environment variable "'.$name.'" must be a valid base64url string.');
                 }
             }
@@ -146,9 +140,6 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
      */
     private static function getStringMapper(string $name): callable
     {
-        /** @psalm-suppress MissingClosureParamType */
-        return static function ($value): string {
-            return (string) $value;
-        };
+        return static fn (mixed $value): string => (string) $value;
     }
 }

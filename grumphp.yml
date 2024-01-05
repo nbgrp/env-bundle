@@ -28,6 +28,8 @@ grumphp:
     phpstan:
       use_grumphp_paths: false
 
-    psalm: ~
+    psalm:
+      no_cache: true
+      show_info: true
 
     securitychecker_local: ~

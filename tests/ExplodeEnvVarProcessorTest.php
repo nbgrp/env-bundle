@@ -1,5 +1,7 @@
-<?php declare(strict_types=1);
+<?php
 // SPDX-License-Identifier: BSD-3-Clause
+
+declare(strict_types=1);
 
 namespace Nbgrp\Tests\EnvBundle;
 
@@ -20,9 +22,7 @@ final class ExplodeEnvVarProcessorTest extends TestCase
     {
         $processor = new CsvEnvVarProcessor($delimiterMap);
 
-        self::assertSame($expected, $processor->getEnv($prefix, '', static function () use ($envValue) {
-            return $envValue;
-        }));
+        self::assertSame($expected, $processor->getEnv($prefix, '', static fn () => $envValue));
     }
 
     /**

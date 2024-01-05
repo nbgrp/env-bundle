@@ -1,5 +1,7 @@
-<?php declare(strict_types=1);
+<?php
 // SPDX-License-Identifier: BSD-3-Clause
+
+declare(strict_types=1);
 
 namespace Nbgrp\EnvBundle\DependencyInjection;
 
@@ -54,20 +56,18 @@ class Configuration implements ConfigurationInterface
             ->canBeEnabled()
             ->beforeNormalization()
                 ->ifArray()
-                ->then(static function (array $value): array {
-                    return array_intersect_key(
+                ->then(static fn (array $value): array => array_intersect_key(
                         array_merge(
                             $value,
                             [
                                 'delimiters' => array_diff_key(
                                     $value['delimiters'] ?? $value,
-                                    ['enabled' => null]
+                                    ['enabled' => null],
                                 ),
-                            ]
+                            ],
                         ),
-                        ['enabled' => null, 'delimiters' => null]
-                    );
-                })
+                        ['enabled' => null, 'delimiters' => null],
+                    ))
             ->end()
             ->fixXmlConfig('delimiter')
             ->children()
@@ -78,9 +78,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarPrototype()
                         ->cannotBeEmpty()
                         ->validate()
-                            ->ifTrue(static function ($value): bool {
-                                return \strlen($value) > 1;
-                            })
+                            ->ifTrue(static fn ($value): bool => \strlen($value) > 1)
                             ->thenInvalid('Delimiter should be one character only.')
                         ->end()
                     ->end()
