@@ -47,7 +47,7 @@ nbgroup_env:
         colon: ':'    #  csv-colon will parse env value into array with ":" as a separator
 ```
 
-PHP config example (for Symfony 5):
+PHP config example (for Symfony 5+):
 
 ```php
 // config/packages/nbgroup_env.php
