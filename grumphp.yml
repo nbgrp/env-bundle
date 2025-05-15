@@ -18,8 +18,7 @@ grumphp:
 
     phpcs: ~
 
-    phpcsfixer:
-      config: '.php-cs-fixer.php'
+    phpcsfixer: ~
 
     phpmd:
       ruleset: [ 'phpmd-ruleset' ]
