@@ -6,23 +6,28 @@ declare(strict_types=1);
 namespace Nbgrp\Tests\EnvBundle\DependencyInjection;
 
 use Nbgrp\EnvBundle\DependencyInjection\Configuration;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
- * @covers \Nbgrp\EnvBundle\DependencyInjection\Configuration
- *
  * @internal
  */
+#[CoversClass(Configuration::class)]
 final class ConfigurationTest extends TestCase
 {
     /** @var Processor */
     private $processor;
 
-    /**
-     * @dataProvider provideValidConfigCases
-     */
+    #[\Override]
+    protected function setUp(): void
+    {
+        $this->processor = new Processor();
+    }
+
+    #[DataProvider('provideValidConfigCases')]
     public function testValidConfig(array $config, array $expected, string $description): void
     {
         self::assertSame($expected, $this->processor->processConfiguration(new Configuration(), [$config]), $description);
@@ -31,7 +36,7 @@ final class ConfigurationTest extends TestCase
     /**
      * @return \Generator<array{array, array, string}>
      */
-    public function provideValidConfigCases(): iterable
+    public static function provideValidConfigCases(): iterable
     {
         yield [
             [],
@@ -104,9 +109,7 @@ final class ConfigurationTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideInvalidConfigCases
-     */
+    #[DataProvider('provideInvalidConfigCases')]
     public function testInvalidConfig(array $config, string $expectedMessage): void
     {
         $this->expectException(InvalidConfigurationException::class);
@@ -117,7 +120,7 @@ final class ConfigurationTest extends TestCase
     /**
      * @return \Generator<array{array, string}>
      */
-    public function provideInvalidConfigCases(): iterable
+    public static function provideInvalidConfigCases(): iterable
     {
         yield [
             [
@@ -134,10 +137,5 @@ final class ConfigurationTest extends TestCase
             ],
             'Delimiter should be one character only.',
         ];
-    }
-
-    protected function setUp(): void
-    {
-        $this->processor = new Processor();
     }
 }

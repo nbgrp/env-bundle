@@ -7,6 +7,9 @@ grumphp:
     enabled: false
 
   tasks:
+    composer:
+      strict: true
+
     composer_normalize:
       indent_size: 4
       indent_style: 'space'
@@ -32,4 +35,4 @@ grumphp:
       no_cache: true
       show_info: true
 
-    securitychecker_local: ~
+    securitychecker_composeraudit: ~

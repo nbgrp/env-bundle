@@ -6,19 +6,18 @@ declare(strict_types=1);
 namespace Nbgrp\Tests\EnvBundle;
 
 use Nbgrp\EnvBundle\ArrayCastEnvVarProcessor;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
 /**
- * @covers \Nbgrp\EnvBundle\ArrayCastEnvVarProcessor
- *
  * @internal
  */
+#[CoversClass(ArrayCastEnvVarProcessor::class)]
 final class ArrayCastEnvVarProcessorTest extends TestCase
 {
-    /**
-     * @dataProvider provideSuccessCases
-     */
+    #[DataProvider('provideSuccessCases')]
     public function testSuccess(string $prefix, array $envValue, array $expected): void
     {
         $processor = new ArrayCastEnvVarProcessor();
@@ -29,7 +28,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     /**
      * @return \Generator<array{string, array, array}>
      */
-    public function provideSuccessCases(): iterable
+    public static function provideSuccessCases(): iterable
     {
         yield 'bool-array' => [
             'bool-array',
@@ -74,15 +73,13 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideInvalidNumericCases
-     */
+    #[DataProvider('provideInvalidNumericCases')]
     public function testInvalidNumeric(string $prefix, array $envValue, string $expectedMessageFormat): void
     {
         $processor = new ArrayCastEnvVarProcessor();
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage(sprintf($expectedMessageFormat, 'DM'));
+        $this->expectExceptionMessage(\sprintf($expectedMessageFormat, 'DM'));
 
         $processor->getEnv($prefix, 'DM', static fn (): array => $envValue);
     }
@@ -90,7 +87,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     /**
      * @return \Generator<array{string, array, string}>
      */
-    public function provideInvalidNumericCases(): iterable
+    public static function provideInvalidNumericCases(): iterable
     {
         yield [
             'int-array',
@@ -105,15 +102,13 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideInvalidBase64Cases
-     */
+    #[DataProvider('provideInvalidBase64Cases')]
     public function testInvalidBase64(string $prefix, array $envValue, string $expectedMessageFormat): void
     {
         $processor = new ArrayCastEnvVarProcessor();
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage(sprintf($expectedMessageFormat, 'DM'));
+        $this->expectExceptionMessage(\sprintf($expectedMessageFormat, 'DM'));
 
         $processor->getEnv($prefix, 'DM', static fn (): array => $envValue);
     }
@@ -121,7 +116,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     /**
      * @return \Generator<array{string, array, string}>
      */
-    public function provideInvalidBase64Cases(): iterable
+    public static function provideInvalidBase64Cases(): iterable
     {
         yield [
             'base64-array',

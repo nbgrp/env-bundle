@@ -5,15 +5,19 @@ declare(strict_types=1);
 
 namespace Nbgrp\Tests\EnvBundle\DependencyInjection;
 
+use Nbgrp\EnvBundle\ArrayCastEnvVarProcessor;
+use Nbgrp\EnvBundle\DependencyInjection\Configuration;
 use Nbgrp\EnvBundle\DependencyInjection\NbgroupEnvExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * @covers \Nbgrp\EnvBundle\DependencyInjection\NbgroupEnvExtension
- *
  * @internal
  */
+#[CoversClass(NbgroupEnvExtension::class)]
+#[CoversClass(ArrayCastEnvVarProcessor::class)]
+#[CoversClass(Configuration::class)]
 final class NbgroupEnvExtensionTest extends TestCase
 {
     public function testComplexUsage(): void

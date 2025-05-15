@@ -6,18 +6,20 @@ declare(strict_types=1);
 namespace Nbgrp\Tests\EnvBundle;
 
 use Nbgrp\EnvBundle\CsvEnvVarProcessor;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Nbgrp\EnvBundle\CsvEnvVarProcessor
- *
  * @internal
  */
+#[CoversClass(CsvEnvVarProcessor::class)]
 final class ExplodeEnvVarProcessorTest extends TestCase
 {
     /**
-     * @dataProvider provideSuccessCases
+     * @param array<string, string> $delimiterMap
      */
+    #[DataProvider('provideSuccessCases')]
     public function testSuccess(array $delimiterMap, string $prefix, string $envValue, array $expected): void
     {
         $processor = new CsvEnvVarProcessor($delimiterMap);
@@ -28,7 +30,7 @@ final class ExplodeEnvVarProcessorTest extends TestCase
     /**
      * @return \Generator<array{array, string, string, list<string>}>
      */
-    public function provideSuccessCases(): iterable
+    public static function provideSuccessCases(): iterable
     {
         $delimiterMap = [
             'csv-dot' => '.',
@@ -69,9 +71,10 @@ final class ExplodeEnvVarProcessorTest extends TestCase
             $delimiterMap,
             'csv-dot',
             '"\".".\.."\""".\.',
+            // @phpstan-ignore greaterOrEqual.alwaysTrue
             \PHP_VERSION_ID >= 70400
-                ? ['\\', '.\\..\\"""', '\\', '']
-                : ['\\".', '\\', '', '\"".\\.'],
+                ? ['\\', '.\..\"""', '\\', '']
+                : ['\".', '\\', '', '\"".\.'],
         ];
     }
 }

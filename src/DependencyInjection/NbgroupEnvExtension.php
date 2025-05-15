@@ -20,11 +20,14 @@ class NbgroupEnvExtension extends Extension
 {
     private const NB_REPLACEMENT_MARK = '// NB';
 
+    #[\Override]
     public function getConfiguration(array $config, ContainerBuilder $container): Configuration
     {
         return new Configuration();
     }
 
+    /** @psalm-suppress MixedArrayAccess, MixedArgument */
+    #[\Override]
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();

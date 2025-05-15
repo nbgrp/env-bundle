@@ -10,6 +10,7 @@ use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
 final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
 {
+    #[\Override]
     public static function getProvidedTypes(): array
     {
         return [
@@ -27,6 +28,7 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
      *
      * @psalm-suppress MixedReturnTypeCoercion
      */
+    #[\Override]
     public function getEnv(string $prefix, string $name, \Closure $getEnv): array
     {
         $env = (array) $getEnv($name);
@@ -46,6 +48,7 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
      */
     private static function getBooleanMapper(): callable
     {
+        /** @psalm-suppress RiskyTruthyFalsyComparison */
         return static fn (mixed $value): bool => (bool) (filter_var($value, \FILTER_VALIDATE_BOOLEAN, ['flags' => \FILTER_NULL_ON_FAILURE]) ?? filter_var($value, \FILTER_VALIDATE_INT) ?: filter_var($value, \FILTER_VALIDATE_FLOAT));
     }
 
@@ -55,6 +58,7 @@ final class ArrayCastEnvVarProcessor implements EnvVarProcessorInterface
     private static function getIntegerMapper(string $name): callable
     {
         return static function (mixed $value) use ($name): int {
+            /** @psalm-suppress RiskyTruthyFalsyComparison */
             if ((filter_var($value, \FILTER_VALIDATE_INT) ?: filter_var($value, \FILTER_VALIDATE_FLOAT)) === false) {
                 throw new RuntimeException('Non-numeric member of environment variable "'.$name.'" cannot be cast to int.');
             }

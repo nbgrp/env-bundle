@@ -61,6 +61,7 @@
                 <element value="private methods" />
             </property>
         </properties>
+        <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
     <rule ref="SlevomatCodingStandard.Classes.MethodSpacing" />
     <rule ref="SlevomatCodingStandard.Classes.ModernClassNameReference" />
@@ -185,14 +186,17 @@
 
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <properties>
-            <property name="linesCountBeforeDeclare" value="0" />
+            <property name="linesCountBeforeDeclare" value="1" />
             <property name="linesCountAfterDeclare" value="1" />
             <property name="spacesCountAroundEqualsSign" value="0" />
         </properties>
     </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.DisallowArrayTypeHintSyntax">
         <properties>
-            <property name="traversableTypeHints" value="true" />
+            <property name="traversableTypeHints" type="array">
+                <element value="Traversable" />
+                <element value="\ArrayIterator" />
+            </property>
         </properties>
     </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue" />
@@ -204,9 +208,9 @@
         <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification" />
     </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing" />
-    <rule ref="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat">
+    <rule ref="SlevomatCodingStandard.TypeHints.DNFTypeHintFormat">
         <properties>
-            <property name="withSpaces" value="no" />
+            <property name="withSpacesAroundOperators" value="no" />
             <property name="shortNullable" value="yes" />
             <property name="nullPosition" value="last" />
         </properties>
