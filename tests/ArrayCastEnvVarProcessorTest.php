@@ -29,7 +29,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     /**
      * @return \Generator<array{string, array, array}>
      */
-    public function provideSuccessCases(): iterable
+    public static function provideSuccessCases(): iterable
     {
         yield 'bool-array' => [
             'bool-array',
@@ -82,7 +82,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
         $processor = new ArrayCastEnvVarProcessor();
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage(sprintf($expectedMessageFormat, 'DM'));
+        $this->expectExceptionMessage(\sprintf($expectedMessageFormat, 'DM'));
 
         $processor->getEnv($prefix, 'DM', static fn (): array => $envValue);
     }
@@ -90,7 +90,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     /**
      * @return \Generator<array{string, array, string}>
      */
-    public function provideInvalidNumericCases(): iterable
+    public static function provideInvalidNumericCases(): iterable
     {
         yield [
             'int-array',
@@ -113,7 +113,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
         $processor = new ArrayCastEnvVarProcessor();
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage(sprintf($expectedMessageFormat, 'DM'));
+        $this->expectExceptionMessage(\sprintf($expectedMessageFormat, 'DM'));
 
         $processor->getEnv($prefix, 'DM', static fn (): array => $envValue);
     }
@@ -121,7 +121,7 @@ final class ArrayCastEnvVarProcessorTest extends TestCase
     /**
      * @return \Generator<array{string, array, string}>
      */
-    public function provideInvalidBase64Cases(): iterable
+    public static function provideInvalidBase64Cases(): iterable
     {
         yield [
             'base64-array',

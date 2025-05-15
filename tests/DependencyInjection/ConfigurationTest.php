@@ -20,6 +20,11 @@ final class ConfigurationTest extends TestCase
     /** @var Processor */
     private $processor;
 
+    protected function setUp(): void
+    {
+        $this->processor = new Processor();
+    }
+
     /**
      * @dataProvider provideValidConfigCases
      */
@@ -31,7 +36,7 @@ final class ConfigurationTest extends TestCase
     /**
      * @return \Generator<array{array, array, string}>
      */
-    public function provideValidConfigCases(): iterable
+    public static function provideValidConfigCases(): iterable
     {
         yield [
             [],
@@ -117,7 +122,7 @@ final class ConfigurationTest extends TestCase
     /**
      * @return \Generator<array{array, string}>
      */
-    public function provideInvalidConfigCases(): iterable
+    public static function provideInvalidConfigCases(): iterable
     {
         yield [
             [
@@ -134,10 +139,5 @@ final class ConfigurationTest extends TestCase
             ],
             'Delimiter should be one character only.',
         ];
-    }
-
-    protected function setUp(): void
-    {
-        $this->processor = new Processor();
     }
 }

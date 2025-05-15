@@ -28,7 +28,7 @@ final class ExplodeEnvVarProcessorTest extends TestCase
     /**
      * @return \Generator<array{array, string, string, list<string>}>
      */
-    public function provideSuccessCases(): iterable
+    public static function provideSuccessCases(): iterable
     {
         $delimiterMap = [
             'csv-dot' => '.',
@@ -69,9 +69,10 @@ final class ExplodeEnvVarProcessorTest extends TestCase
             $delimiterMap,
             'csv-dot',
             '"\".".\.."\""".\.',
+            // @phpstan-ignore greaterOrEqual.alwaysTrue
             \PHP_VERSION_ID >= 70400
-                ? ['\\', '.\\..\\"""', '\\', '']
-                : ['\\".', '\\', '', '\"".\\.'],
+                ? ['\\', '.\..\"""', '\\', '']
+                : ['\".', '\\', '', '\"".\.'],
         ];
     }
 }

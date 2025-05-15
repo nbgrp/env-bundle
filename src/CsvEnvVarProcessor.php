@@ -26,6 +26,7 @@ final class CsvEnvVarProcessor implements EnvVarProcessorInterface
         $this->delimiterMap = $delimiterMap;
     }
 
+    #[\Override]
     public static function getProvidedTypes(): array
     {
         // NB
@@ -36,6 +37,7 @@ final class CsvEnvVarProcessor implements EnvVarProcessorInterface
     /**
      * @return non-empty-list<string|null>
      */
+    #[\Override]
     public function getEnv(string $prefix, string $name, \Closure $getEnv): array
     {
         if (\array_key_exists($prefix, $this->delimiterMap) === false) {
@@ -49,6 +51,7 @@ final class CsvEnvVarProcessor implements EnvVarProcessorInterface
             throw new RuntimeException('Environment variable "'.$name.'" should be a string.');
         }
 
+        // @phpstan-ignore greaterOrEqual.alwaysTrue
         return str_getcsv($env, $delimiter, '"', \PHP_VERSION_ID >= 70400 ? '' : '\\');
     }
 }

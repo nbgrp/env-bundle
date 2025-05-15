@@ -6,9 +6,11 @@ parameters:
   bootstrapFiles:
     - vendor/bin/.phpunit/phpunit/vendor/autoload.php
 
-  checkMissingIterableValueType: false
-
   ignoreErrors:
     -
       message: '/Cannot cast mixed to (int|float|string)/'
       path: 'src/ArrayCastEnvVarProcessor.php'
+    -
+      identifier: missingType.iterableValue
+    -
+      identifier: phpDoc.parseError
