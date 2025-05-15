@@ -9,9 +9,11 @@ use Symfony\Component\DependencyInjection\EnvVarProcessorInterface;
 use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
+// @codeCoverageIgnoreStart
 if (class_exists(CsvEnvVarProcessor::class, false)) {
     return;
 }
+// @codeCoverageIgnoreEnd
 
 final class CsvEnvVarProcessor implements EnvVarProcessorInterface
 {

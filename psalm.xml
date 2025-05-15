@@ -17,12 +17,12 @@
     </projectFiles>
 
     <issueHandlers>
-        <UndefinedClass>
+        <!-- PHPUnit -->
+        <PropertyNotSetInConstructor>
             <errorLevel type="suppress">
                 <directory name="tests" />
-                <file name=".php-cs-fixer.php" />
             </errorLevel>
-        </UndefinedClass>
+        </PropertyNotSetInConstructor>
     </issueHandlers>
 
     <plugins>

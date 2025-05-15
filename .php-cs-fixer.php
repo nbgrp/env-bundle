@@ -31,6 +31,9 @@ return (new PhpCsFixer\Config())
         ],
         'comment_to_phpdoc' => [
             'ignored_tags' => [
+                'codeCoverageIgnoreStart',
+                'codeCoverageIgnoreEnd',
+                'codeCoverageIgnore',
                 'phan-suppress-current-line',
                 'phan-suppress-next-line',
                 'see',
